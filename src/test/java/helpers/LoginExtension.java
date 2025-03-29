@@ -2,21 +2,23 @@ package helpers;
 
 import api.AuthApi;
 import models.LoginResponseModel;
+import models.UserNameAndPasswordModel;
 import org.junit.jupiter.api.extension.BeforeEachCallback;
 import org.junit.jupiter.api.extension.ExtensionContext;
 import org.openqa.selenium.Cookie;
 
 import static com.codeborne.selenide.Selenide.open;
 import static com.codeborne.selenide.WebDriverRunner.getWebDriver;
-import static tests.TestData.credentials;
-
 
 public class LoginExtension implements BeforeEachCallback {
 
     @Override
     public void beforeEach(ExtensionContext context) {
-        AuthApi authorizationApi = new AuthApi();
+        String login = System.getProperty("userName", "userName");
+        String password = System.getProperty("password", "password");
 
+        AuthApi authorizationApi = new AuthApi();
+        UserNameAndPasswordModel credentials = new UserNameAndPasswordModel(login, password);
         LoginResponseModel loginResponse = authorizationApi.login(credentials);
 
         open("/favicon.ico");
