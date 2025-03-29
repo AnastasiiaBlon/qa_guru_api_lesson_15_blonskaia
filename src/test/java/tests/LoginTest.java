@@ -21,7 +21,7 @@ public class LoginTest extends TestBase {
         getWebDriver().manage().addCookie(new Cookie("expires", loginResponse.getExpires()));
 
         open("/profile");
-        $("#userName-value").shouldHave(text(credentials.getUserName()));
+        $("#userName-value").shouldHave(text(credentials.getLogin()));
 
     }
 }
